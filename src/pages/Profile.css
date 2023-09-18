@@ -1,0 +1,15 @@
+ion-toolbar {
+    --background:#000000;
+    --color:#fff;
+}
+
+ion-card {
+    --background: #1d1e1f;
+    --color:#fff;
+    margin-bottom: 35px;
+    border-radius: 20px;
+  }
+
+ion-content {
+    --background: #000000;
+}

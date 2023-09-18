@@ -1,0 +1,7 @@
+{
+  "name": "mhs_front",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
