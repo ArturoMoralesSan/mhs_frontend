@@ -102,11 +102,11 @@ const Profile = () => {
       <IonContent fullscreen>
         <IonGrid>
           <IonRow>
-            <IonCol size="2">
+            <IonCol size="3">
               <IonCard>
                 <IonCardHeader>
                 </IonCardHeader>
-                <IonCardContent>
+                <IonCardContent className="card-profile">
                   <IonImg src="/assets/pablo.png" class="minero-image"></IonImg>
                   <IonCardTitle class="custom-card-title" >Tom Ray</IonCardTitle>
                   <IonCardSubtitle>37 Years Old </IonCardSubtitle>
@@ -114,10 +114,20 @@ const Profile = () => {
               </IonCard>
               <IonCard>
                 <IonCardHeader>
-                  <IonCardTitle class= "custom-card-title" >Historical Position</IonCardTitle>
-                  <IonCardSubtitle>Supervisor  May 23 - Present
-                    Driller    June 22 - Mayo 23 
-                    Helper     May 21 - June 22
+                  <IonCardTitle class= "custom-card-title" >Role Position</IonCardTitle>
+                  <IonCardSubtitle>
+                   
+
+                    <div className="row-role">
+                      <span className='role-name'>Supervisor</span><span className='role-date'>May 23 - Present</span>
+                    </div>
+                    <div className="row-role">
+                      <span className='role-name'>Driller</span> <span className='role-date'>June 22 - Mayo 23</span>
+                    </div>
+                    <div className="row-role">
+                        <span className='role-name'>Helper</span> <span className='role-date'>May 21 - June 22</span>
+                    </div>
+                    
                   </IonCardSubtitle>
                 </IonCardHeader>
                 <IonCardContent></IonCardContent>
@@ -132,39 +142,53 @@ const Profile = () => {
               </IonCard>
             </IonCol>
             <IonCol size="9">
+            <div>
+                <IonGrid className="grid-step">
+                  <IonRow className="row-step">
+                  <IonCol size="2">
+                      <div className='step step-active' onClick={() => handleButtonClick('Medical Resume')}>
+                        <span className='step-number'>1</span>
+                        Medical Resume
+                      </div>
+                  </IonCol>
+                  <IonCol size="1">
+                  <div className="divider-step divider-step-active"></div>
+                  </IonCol>
+                  <IonCol size="2">
+                      <div className='step' onClick={() => handleButtonClick('Correlation Matrix')}>
+                        <span className='step-number'>2</span>
+                        Correlation Matrix
+                      </div>
+                  </IonCol>
+                  <IonCol size="1">
+                  <div className="divider-step"></div>
+                  </IonCol>
+                  <IonCol size="2">
+                      <div className='step' onClick={() => handleButtonClick('PCA')}>
+                        <span className='step-number'>3</span>
+                        PCA
+                      </div>
+                  </IonCol>
+                  <IonCol size="1">
+                  <div className="divider-step"></div>
+                  </IonCol>
+                  <IonCol size="2">
+                    <div className='step' onClick={() => handleButtonClick('RNA') }>
+                      <span className='step-number'>4</span>
+                      RNA
+                    </div>
+                  </IonCol>
+                  </IonRow>
+                </IonGrid>
+              </div>
             <IonCard>
               <IonCardHeader>
                 <IonCardTitle></IonCardTitle>
                 <IonCardSubtitle></IonCardSubtitle>
               </IonCardHeader>
-
+              
               <IonCardContent>
-              <div>
-                <IonGrid>
-                  <IonRow>
-                  <IonCol>
-                    <IonItem>
-                      <IonButton fill="clear" color="dark" onClick={() => handleButtonClick('Medical Resume')}>Medical Resume</IonButton>
-                    </IonItem>
-                  </IonCol>
-                  <IonCol>
-                    <IonItem>
-                      <IonButton fill="clear" color="dark" onClick={() => handleButtonClick('Correlation Matrix')}>Correlation Matrix</IonButton>
-                    </IonItem>
-                  </IonCol>
-                  <IonCol>
-                    <IonItem>
-                      <IonButton fill="clear" color="dark"  onClick={() => handleButtonClick('PCA')}>PCA</IonButton>
-                    </IonItem>
-                  </IonCol>
-                  <IonCol>
-                    <IonItem>
-                    <IonButton fill="clear" color="dark" onClick={() => handleButtonClick('RNA') }>RNA</IonButton>
-                    </IonItem>
-                  </IonCol>
-                  </IonRow>
-                </IonGrid>
-              </div>
+              
               {selectedButton === 'Medical Resume' ? (
                     <div className="medical-resume-table">
                     <table>
@@ -190,9 +214,15 @@ const Profile = () => {
 
               </IonCardContent>
             </IonCard>
-            <IonButton fill="clear" color="danger">Back</IonButton>
-            <IonButton fill="clear" className='ButtoSaveg'>Save for later</IonButton>
-            <IonButton className='ButtoSave' onClick={() => handleButtonClick('Change Image')} >Next</IonButton>
+            <div className='column-buttons'>
+              <div>
+                <IonButton fill="clear" color="danger">Back</IonButton>
+              </div>
+              <div>
+                <IonButton fill="clear" className='ButtoSaveg'>Save for later</IonButton>
+                <IonButton className='ButtoSave' onClick={() => handleButtonClick('Change Image')} >Next</IonButton>
+              </div>
+            </div>
             </IonCol>
             
           </IonRow>
