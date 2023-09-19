@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonButton, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonCheckbox, IonCol, IonContent, IonGrid, IonPage, IonRow } from '@ionic/react';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonInput, IonItem, IonLabel, IonList  } from '@ionic/react';
 import './Login.css';
 
@@ -72,7 +72,13 @@ function Login() {
             </IonCol>
           </IonRow>
         </IonGrid>
-        
+        <IonGrid>
+            <IonRow>
+                <IonCol className='colflex'>
+                    <span className='copyright'>Copyright 2023, Miner’s Health Shield. All rights reserved.</span>
+                </IonCol>
+            </IonRow>
+        </IonGrid>
       </IonContent>
     </IonPage>
   );
