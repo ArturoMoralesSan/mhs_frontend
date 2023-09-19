@@ -1,0 +1,140 @@
+.container-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 91vh;
+}
+.login {
+    background-color: transparent !important;
+    width: 300px;
+
+}
+.title-login {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #fff;
+}
+.divider-title {
+    height: 1px;
+    border: 1.4px solid #5CE009;
+    width: 24px;
+    display: block;
+    margin: 4px auto;
+}
+.background-login {
+    --background: none;
+    background-image: url('../assets/bg.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.login-logo {
+    max-width: 100%;
+    width: 65px;
+    display: block;
+    margin: 0 auto;
+}
+.background-list {
+    background-color: transparent;
+}
+.label-white {
+    color: #fff !important;
+    font-size: 0.6rem !important;
+}
+.placeholder-white {
+    color: #fff;
+    --placeholder-color: #fff;
+    font-size: 0.7rem;
+}
+.buttonLogin {
+    --background: #5CE009 !important;
+    box-shadow: #5ce009c4 0px 0px 10px 3px;
+    font-size: 0.7rem;
+    color: #000;
+    font-weight: bold;
+}
+.rememberme-checkbox {
+    margin-right: 5px;
+    margin-left: 0;
+}
+.rememberme-checkbox svg {
+    background: transparent !important;
+    border: 1px solid #fff !important;
+}
+.divider-login {
+    
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+  }
+  .divider-login-span {
+    font-size: 0.7rem;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  
+  .divider-login::before, .divider-login::after {
+    flex: 1;
+    content: '';
+    padding: 0.2px;
+    background-color: #fff;
+    margin: 5px;
+  }
+ 
+
+  .col-socialmedia-google {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 20px;
+  }
+  .col-socialmedia-apple {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+  }
+  .socialmedia-login-google {
+    background-color: #fff;
+    padding: 13px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+  .socialmedia-login-apple {
+    background-color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+  .label-icon-google {
+    height: 25px;
+  }
+  .label-icon-apple {
+    height: 30px;
+}
+.label-icon {
+    width: 10px;
+}
+.item-input {
+    border-bottom: 1px solid #666666;
+    margin: 10px 0px;
+}
+.button-register-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+.button-register {
+    background-color: transparent !important;
+    border: 1.7px solid #5CE009;
+    padding: 10px 40px;
+    color: #fff;
+    text-decoration: none;
+}
