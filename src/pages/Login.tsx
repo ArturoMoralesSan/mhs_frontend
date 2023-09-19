@@ -6,12 +6,17 @@ import './Login.css';
 function Login() {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar className='toolbar-login'>
-          <IonTitle>Miner’s Health Shield</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent className='background-login' fullscreen>
+      <IonGrid>
+          <IonRow className='toolbar-launchpad'>
+            <IonCol>
+            <div className='title-contact'>CONTACT US</div>
+            </IonCol>
+            <IonCol>
+            <div className='title-website'>Miner’s Health Shield</div>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
         <IonGrid>
           <IonRow>
             <IonCol className='container-login'>
