@@ -236,3 +236,69 @@ table.hidden {
     align-items: center;
     padding-bottom: 5px;
 }
+.whitecolor-hash {
+  color: #fff;
+}
+
+.container-contentmodal {
+  padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #262626;
+    height: 69vh;
+}
+.custom-modal-header {
+  background: #262626;
+  height: 0px;
+}
+.contentmodal-title {
+  color: #5CE009;
+}
+.contentmodal-desc {
+  font-size: 0.8rem;
+  color: #fff;
+}
+.contentmodal-hash {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+.custom-modal-content {
+  padding: 20px;
+}
+.bg-accordion {
+  background-color: transparent !important;
+}
+
+.modal-close {
+  z-index: 10000;
+  position: absolute;
+  color: #767575;
+  float: right;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  width: 100%;
+  padding: 10px;
+  font-weight: 900;
+}
+.radiobutton {
+  --color-checked: #5ce009 !important;
+  border-color: #5ce009 !important;
+}
+
+.radio-icon {
+  margin: 0px;
+  border-radius: var(--border-radius);
+  border-width: var(--border-width);
+  border-style: var(--border-style);
+  border-color: #fff !important;
+}
+.checkbox {
+  --checkbox-background: #5ce009 !important;
+  --checkbox-background-checked: #5ce009 !important;
+  --border-color-checked: #5ce009 !important;
+}

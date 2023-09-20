@@ -3,6 +3,10 @@ http://ionicframework.com/docs/theming/ */
 
 /** Ionic CSS Variables **/
 :root {
+  :host(.ion-color:not(.item-fill-solid):not(.item-fill-outline)) .item-native {
+    --background: transparent !important;
+    --color: #fff !important;
+  }
   --ion-default-font: 'Poppins', sans-serif !important;
   /** primary **/
   --ion-color-primary: #3880ff;

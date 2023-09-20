@@ -1,31 +1,12 @@
 import React, { useState } from 'react';
-import { IonGrid, IonRow, IonCol, IonItem, IonButton, IonPage, IonToolbar, IonTitle, IonHeader, IonContent, IonImg, IonCardSubtitle, IonCardContent, IonCardTitle, IonCardHeader,IonCard } from '@ionic/react';
-
-
+import { IonGrid, IonRow, IonCol, IonModal, IonButton, IonPage, IonToolbar, IonTitle, IonHeader, IonContent, IonImg, IonCardSubtitle, IonCardContent, IonCardTitle, IonCardHeader,IonCard, IonAccordion, IonItem, IonLabel, IonAccordionGroup } from '@ionic/react';
+import Plotly from 'plotly.js-dist-min';
 import './Profile.css';
 
 
 const Profile = () => {
-  const [selectedButton, setSelectedButton] = useState('');
-  const [imageURL, setImageURL] = useState('');
-
-  // Define image URLs for each button
-  const imageMapping  = {
-    'Correlation Matrix':  '/assets/mat.png',
-    'PCA': '/assets/PCA.png',
-    'RNA': '/assets/rna.png',
-  };
-  const imageUrls = [
-    '/assets/mat.png',
-    '/assets/PCA.png',
-    '/assets/rna.png',
-    // Add more image URLs as needed
-  ];
-
-  const defaultImage = '/assets/mat.png';
-
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  const [selectedButton, setSelectedButton] = useState('Medical Resume');
+  
 
   const [cellValues, setCellValues] = useState({
     'hereditary-family-history': '',
@@ -36,66 +17,63 @@ const Profile = () => {
     'work-history-and-risk-factors': '',
     'physical-exploration': '',
   });
+  
 
-  const handleCellClick = (cellId: string) => {
-    const inputValue = window.prompt('Enter data for this cell:');
-    if (inputValue !== null) {
-      setCellValues((prevValues) => ({
-        ...prevValues,
-        [cellId]: inputValue,
-      }));
-    }
+  const fetchDataMAT = () => {
+    setSelectedButton('MAT')
+    // Coloca aquí la URL de la API que deseas consultar
+    const apiUrl = 'https://minershealthshield.pythonanywhere.com/correlation';
+
+    fetch(apiUrl)
+    .then(response => response.json())
+    .then(json => {
+        Plotly.newPlot('my-plot', json['data'], json['layout']);
+    })
+      .catch((error) => {
+        console.error('Error al obtener datos:', error);
+      });
   };
-  
+  const fetchDataPCA = () => {
+    setSelectedButton('PCA')
+    // Coloca aquí la URL de la API que deseas consultar
+    const apiUrl = 'https://minershealthshield.pythonanywhere.com/PCA';
 
-  const imageKeys = Object.keys(imageMapping);
+    fetch(apiUrl)
+    .then(response => response.json())
+    .then(json => {
+        Plotly.newPlot('my-plot', json['data'], json['layout']);
+    })
+      .catch((error) => {
+        console.error('Error al obtener datos:', error);
+      });
+  };
+  const fetchDataRNA = () => {
+    setSelectedButton('RNA')
+    // Coloca aquí la URL de la API que deseas consultar
+    const apiUrl = 'https://minershealthshield.pythonanywhere.com/RNA';
 
-  
-  const medicalResumeTable = (
-    <div className="medical-resume-table">
-      <table>
-        <tbody>
-          <tr>
-          <td id="hereditary-family-history">Hereditary-family history</td>
-          <td id="biometric-data">Biometric Data</td>
-          <td id="pathological-personal-history">Pathological Personal History</td>
-          <td id="human-system">Human System</td>
-          <td id="non-pathological-personal-history">Non Pathological Personal History</td>
-          <td id="work-history-and-risk-factors">Work history and risk factors</td>
-          <td id="physical-exploration">Physical Exploration</td>
-        </tr>
-        </tbody>
-      {/* Add more rows and columns as needed */}
-      </table>
-    </div>
-    
-  );
-
-  // Function to handle button click
-  const handleButtonClick = (buttonText: string) => {
-    setSelectedButton(buttonText);
-  
-    if (buttonText === 'Medical Resume') {
-      setImageURL(medicalResumeTable[buttonText as keyof typeof medicalResumeTable]);
-    } else if (buttonText === 'Change Image') {
-      // Cycle through the images
-      const nextImageIndex = (currentImageIndex + 1) % imageUrls.length;
-      setImageURL(imageUrls[nextImageIndex]);
-      setCurrentImageIndex(nextImageIndex);
-    } else {
-      setImageURL(imageMapping[buttonText as keyof typeof imageMapping]);
-    }
-  }
+    fetch(apiUrl)
+    .then(response => response.json())
+    .then(json => {
+        Plotly.newPlot('my-plot', json['data'], json['layout']);
+    })
+      .catch((error) => {
+        console.error('Error al obtener datos:', error);
+      });
+  };
+  const fetchData = () => {
+    setSelectedButton('Medical Resume')
+  };
   
   
 
   return (
+    
     <IonPage>
       <IonHeader>
         <IonToolbar>
          <IonTitle >
           <img src="/assets/papu.png" alt="Image Alt Text" />
-          
           </IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -116,8 +94,6 @@ const Profile = () => {
                 <IonCardHeader>
                   <IonCardTitle class= "custom-card-title" >Role Position</IonCardTitle>
                   <IonCardSubtitle>
-                   
-
                     <div className="row-role">
                       <span className='role-name'>Supervisor</span><span className='role-date'>May 23 - Present</span>
                     </div>
@@ -146,7 +122,7 @@ const Profile = () => {
                 <IonGrid className="grid-step">
                   <IonRow className="row-step">
                   <IonCol size="2">
-                      <div className='step step-active' onClick={() => handleButtonClick('Medical Resume')}>
+                      <div className='step step-active' onClick={() => fetchData()}>
                         <span className='step-number'>1</span>
                         Medical Resume
                       </div>
@@ -155,7 +131,7 @@ const Profile = () => {
                   <div className="divider-step divider-step-active"></div>
                   </IonCol>
                   <IonCol size="2">
-                      <div className='step' onClick={() => handleButtonClick('Correlation Matrix')}>
+                      <div className='step' onClick={() => fetchDataMAT()}>
                         <span className='step-number'>2</span>
                         Correlation Matrix
                       </div>
@@ -164,7 +140,7 @@ const Profile = () => {
                   <div className="divider-step"></div>
                   </IonCol>
                   <IonCol size="2">
-                      <div className='step' onClick={() => handleButtonClick('PCA')}>
+                      <div className='step' onClick={() => fetchDataPCA()}>
                         <span className='step-number'>3</span>
                         PCA
                       </div>
@@ -173,7 +149,7 @@ const Profile = () => {
                   <div className="divider-step"></div>
                   </IonCol>
                   <IonCol size="2">
-                    <div className='step' onClick={() => handleButtonClick('RNA') }>
+                    <div className='step' onClick={() => fetchDataRNA()}>
                       <span className='step-number'>4</span>
                       RNA
                     </div>
@@ -188,26 +164,51 @@ const Profile = () => {
               </IonCardHeader>
               
               <IonCardContent>
-              
               {selectedButton === 'Medical Resume' ? (
-                    <div className="medical-resume-table">
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td id="hereditary-family-history" onClick={() => handleCellClick('hereditary-family-history')}>
-                            {cellValues['hereditary-family-history']}
-                          </td>
-                          <td id="biometric-data" onClick={() => handleCellClick('biometric-data')}>
-                            {cellValues['biometric-data']}
-                          </td>
-                          {/* Repeat for other cells */}
-                        </tr>
-                        {/* Add more rows and columns as needed */}
-                      </tbody>
-                    </table>
-                  </div>
+                    <IonAccordionGroup>
+                    <IonAccordion className="bg-accordion" value="first" toggleIconSlot="start">
+                      <IonItem className="bg-accordion" slot="header" color="light">
+                        <IonLabel>HEREDITARY-FAMILY HISTORY</IonLabel>
+                      </IonItem>
+                      <div className="ion-padding" slot="content">
+                        First Content
+                      </div>
+                    </IonAccordion>
+                    <IonAccordion className="bg-accordion" value="second" toggleIconSlot="start">
+                      <IonItem slot="header" color="light">
+                        <IonLabel>BIOMETRIC DATA</IonLabel>
+                      </IonItem>
+                      <div className="ion-padding" slot="content">
+                        Second Content
+                      </div>
+                    </IonAccordion>
+                    <IonAccordion className="bg-accordion" value="third" toggleIconSlot="start">
+                      <IonItem slot="header" color="light">
+                        <IonLabel>PATHOLOGICAL PERSONAL HISTORY</IonLabel>
+                      </IonItem>
+                      <div className="ion-padding" slot="content">
+                        Third Content
+                      </div>
+                    </IonAccordion>
+                    <IonAccordion className="bg-accordion" value="four" toggleIconSlot="start">
+                      <IonItem slot="header" color="light">
+                        <IonLabel>HUMAN HISTORY</IonLabel>
+                      </IonItem>
+                      <div className="ion-padding" slot="content">
+                        Third Content
+                      </div>
+                    </IonAccordion>
+                    <IonAccordion className="bg-accordion" value="five" toggleIconSlot="start">
+                      <IonItem slot="header" color="light">
+                        <IonLabel>NON-PATHOLOGICAL PERSONAL HISTORY</IonLabel>
+                      </IonItem>
+                      <div className="ion-padding" slot="content">
+                        Third Content
+                      </div>
+                    </IonAccordion>
+                  </IonAccordionGroup>
               ) : (
-                <IonImg alt={selectedButton} src={imageURL}></IonImg>
+                <div id="my-plot" />
               )}
               
 
@@ -220,7 +221,7 @@ const Profile = () => {
               </div>
               <div>
                 <IonButton fill="clear" className='ButtoSaveg'>Save for later</IonButton>
-                <IonButton className='ButtoSave' onClick={() => handleButtonClick('Change Image')} >Next</IonButton>
+                <IonButton className='ButtoSave'>Next</IonButton>
               </div>
             </div>
             </IonCol>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ethers } from 'ethers';
-import {IonCheckbox, IonRadioGroup,IonRadio,IonLabel, IonGrid, IonRow, IonCol, IonButton, IonPage, IonToolbar, IonTitle, IonHeader, IonContent, IonImg, IonCardSubtitle, IonCardContent, IonCardTitle, IonCardHeader,IonCard } from '@ionic/react';
+import {IonCheckbox, IonRadioGroup,IonRadio,IonLabel, IonGrid, IonRow, IonCol, IonButton, IonPage, IonToolbar, IonTitle, IonHeader, IonContent, IonImg, IonCardSubtitle, IonCardContent, IonCardTitle, IonCardHeader,IonCard, IonModal } from '@ionic/react';
 
 
 import './Profile.css';
@@ -8,9 +8,16 @@ import './Profile.css';
 function App() {
   const [data, setData] = useState<string>('');
   const [blockHash, setBlockHash] = useState<string | undefined>(undefined);
+  const [showModal, setShowModal] = useState(false);
+  const [modalData, setModalData] = useState<any>(null);
 
-  const contractAddress = '0x3c59854A08AEb3f7d8249Be2eea11836708a768B'; // Reemplaza con la dirección de tu contrato
-  const provider = new ethers.providers.JsonRpcProvider('http://localhost:7545'); // Cambia esto para apuntar a tu red Ganache
+  const openModal = (data: any) => {
+    setModalData(data);
+    setShowModal(true);
+  }
+  
+  const contractAddress = '0xD06790Cf8b8f7e45Db4D79bA2D3a168C88e9c465'; // Reemplaza con la dirección de tu contrato
+  const provider = new ethers.providers.JsonRpcProvider('http://localhost:9545'); // Cambia esto para apuntar a tu red Ganache
   const contract = new ethers.Contract(contractAddress, ['function storeData(string memory data) public', 'function blockHash() public view'], provider);
   const signer = provider.getSigner();
 
@@ -21,6 +28,8 @@ function App() {
         console.log('Transaction receipt:', receipt);
         const hash = await receipt.blockHash;
         setBlockHash(hash);
+        setShowModal(true);
+
     } catch (error) {
       console.error('Error:', error);
     }
@@ -28,6 +37,8 @@ function App() {
 
   return (
     <IonPage>
+
+      
       <IonHeader>
         <IonToolbar>
          <IonTitle >
@@ -36,6 +47,19 @@ function App() {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        <IonModal isOpen={showModal} className="custom-modal">
+          <div className="custom-modal-header">
+            <label className='modal-close' onClick={() => setShowModal(false)}>X</label>        
+          </div>
+          
+          <div className='container-contentmodal'>
+          <img  className="login-logo" src="http://localhost:8100/assets/check.png" alt="" />
+            <h1 className='contentmodal-title'>Certificate ready!</h1>
+            <span className='contentmodal-desc'>The certificate number is</span>
+            <span className='contentmodal-hash'>{blockHash}</span>
+          </div> 
+        
+        </IonModal>
         <IonGrid>
           <IonRow>
             <IonCol size="3">
@@ -105,10 +129,10 @@ function App() {
                     <div>
                       <IonRadioGroup class="displayFlex" value="custom-checked">
                         <div className='displayFlex padding-radio'>
-                            <IonRadio value="custom"></IonRadio><IonLabel className="padding-radio-label" slot="end">Radio Label</IonLabel>
+                            <IonRadio className="radiobutton" value="custom"></IonRadio><IonLabel className="padding-radio-label" slot="end">Suitable</IonLabel>
                         </div>
                         <div className='displayFlex padding-radio'>
-                            <IonRadio value="custom-checked"></IonRadio><IonLabel className="padding-radio-label" slot="end">Not Suitable</IonLabel>
+                            <IonRadio className="radiobutton" value="custom-checked"></IonRadio><IonLabel className="padding-radio-label" slot="end">Not Suitable</IonLabel>
                         </div>
                         
                       </IonRadioGroup>
@@ -116,27 +140,27 @@ function App() {
                     <div>
                       <IonLabel className="label-textarea">Medical advice</IonLabel>
                       <div className='container-item-advice'>
-                        <IonCheckbox slot="start"></IonCheckbox>
+                        <IonCheckbox className="checkbox" slot="start"></IonCheckbox>
                         <IonLabel className='label-advice'>Medical check-ups</IonLabel>
                       </div>
                       <div className='container-item-advice'>
-                        <IonCheckbox slot="start"></IonCheckbox>
+                        <IonCheckbox className="checkbox" slot="start"></IonCheckbox>
                         <IonLabel className='label-advice'>Use PPE</IonLabel>
                       </div>
                       <div className='container-item-advice'>
-                        <IonCheckbox slot="start"></IonCheckbox>
+                        <IonCheckbox className="checkbox" slot="start"></IonCheckbox>
                         <IonLabel className='label-advice'>Specific Diet</IonLabel>
                       </div>
                       <div className='container-item-advice'>
-                        <IonCheckbox slot="start"></IonCheckbox>
+                        <IonCheckbox className="checkbox" slot="start"></IonCheckbox>
                         <IonLabel className='label-advice'>Assessment for surgery</IonLabel>
                       </div>
                       <div className='container-item-advice'>
-                        <IonCheckbox slot="start"></IonCheckbox>
+                        <IonCheckbox className="checkbox" slot="start"></IonCheckbox>
                         <IonLabel className='label-advice'>Physiotherapy</IonLabel>
                       </div>
                       <div className='container-item-advice'>
-                        <IonCheckbox slot="start"></IonCheckbox>
+                        <IonCheckbox className="checkbox" slot="start"></IonCheckbox>
                         <IonLabel className='label-advice'>Special attention</IonLabel>
                       </div>
                     </div>
@@ -146,8 +170,6 @@ function App() {
                     <textarea className="inputText-area" placeholder="Enter data" onChange={(e) => setData(e.target.value)}>
                           {data}
                     </textarea>
-
-                    {blockHash && <p>Block Hash: {blockHash}</p>}
                   </IonCol>
                 </IonRow>
                 
